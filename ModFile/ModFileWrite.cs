@@ -75,5 +75,13 @@ namespace ModLib
         }
 
         public void WriteByte(byte value) => fileStream.WriteByte(value);
+
+        public ModFile GetRemainder()
+        {
+            long origPosition = Position;
+            ModFile remainder = LoadSegment(Position, (int)(Length - Position));
+            Seek(origPosition, System.IO.SeekOrigin.Begin);
+            return remainder;
+        }
     }
 }
