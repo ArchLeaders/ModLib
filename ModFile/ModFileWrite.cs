@@ -83,5 +83,13 @@ namespace ModLib
             Seek(origPosition, System.IO.SeekOrigin.Begin);
             return remainder;
         }
+
+        public void AddRemainder(ModFile remainder)
+        {
+            long origPosition = Position;
+            remainder.fileStream.CopyTo(fileStream);
+            fileStream.SetLength(Position);
+            Seek(origPosition, System.IO.SeekOrigin.Begin);
+        }
     }
 }
