@@ -44,6 +44,7 @@ namespace ModLib
             return segment;
         }
 
+        [Obsolete("FlushToFile is deprecated, use WriteToFile")]
         public void FlushToFile(string filename)
         {
             if (fileStream is MemoryStream)

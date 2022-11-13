@@ -91,5 +91,16 @@ namespace ModLib
             fileStream.SetLength(Position);
             Seek(origPosition, System.IO.SeekOrigin.Begin);
         }
+
+        public ModFileStatus WriteToFile(string fileLocation)
+        {
+            using (ModFile file = Create(fileLocation))
+            {
+                if (file.Status != ModFileStatus.Success) return file.Status;
+
+                fileStream.CopyTo(file.fileStream);
+                return ModFileStatus.Success;
+            }
+        }
     }
 }

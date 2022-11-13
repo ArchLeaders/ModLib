@@ -78,9 +78,35 @@ namespace ModLib
             return combined;
         }
 
+        /// <summary>
+        /// Reads a pascal string with a SHORT preceding it
+        /// </summary>
+        /// <param name="bigEndian"></param>
+        /// <param name="security"></param>
+        /// <returns></returns>
+        /// <exception cref="DataMisalignedException"></exception>
         public string ReadPascalString(bool bigEndian = true, ushort security = 256)
         {
             ushort length = ReadUshort(true);
+            if (length > security)
+            {
+                Logger.Error("Attempting to read string of length {0} at position {1}!", length, Position);
+                throw new DataMisalignedException("Potential bad string quashed");
+            }
+
+            return ReadString(length);
+        }
+
+        /// <summary>
+        /// Reads a pascal string with an INT preceding it
+        /// </summary>
+        /// <param name="bigEndian"></param>
+        /// <param name="security"></param>
+        /// <returns></returns>
+        /// <exception cref="DataMisalignedException"></exception>
+        public string ReadBigPascalString(bool bigEndian = true, uint security = 256)
+        {
+            int length = ReadInt(true);
             if (length > security)
             {
                 Logger.Error("Attempting to read string of length {0} at position {1}!", length, Position);
