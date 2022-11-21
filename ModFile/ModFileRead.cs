@@ -155,7 +155,7 @@ namespace ModLib
         public int Find(byte[] searchQuery)
         {
             long offset = Position;
-            Seek(0, System.IO.SeekOrigin.Begin);
+            //Seek(0, System.IO.SeekOrigin.Begin);
             byte[] buffer = ReadArray(searchQuery.Length); // Read the first sq.Length bytes into the buffer
             int bufferOffset = 0;
             for (int i = searchQuery.Length; i < Length; i++)
