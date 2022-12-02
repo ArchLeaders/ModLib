@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -175,21 +176,22 @@ namespace ModLib
         {
             return Find(Encoding.Default.GetBytes(searchQuery));
         }
-
-        public bool CheckString(string comparison, string errorMessage)
+        
+        public ModFile LoadSegment(long offset, int size)
         {
-            string read = ReadString(comparison.Length);
-            bool result = read == comparison;
-            if (!result) Logger.Error(errorMessage, Position, read);
-            return result;
-        }
+            ModFile segment = new ModFile();
+            segment.fileStream = new MemoryStream(size);
 
-        public bool CheckInt(int comparison, string errorMessage)
-        {
-            int read = ReadInt(true);
-            bool result = read == comparison;
-            if (!result) Logger.Error(errorMessage, Position, read);
-            return result;
+            fileStream.Seek(offset, SeekOrigin.Begin);
+            
+            byte[] buffer = new byte[size];
+            fileStream.Read(buffer, 0, buffer.Length);
+            segment.fileStream.Write(buffer, 0, buffer.Length);
+
+
+            segment.fileStream.Position = 0;
+
+            return segment;
         }
     }
 }

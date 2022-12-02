@@ -17,6 +17,8 @@ namespace ModLib
 
         public long Length => fileStream.Length;
 
+        public string Location => ((FileStream)fileStream).Name;
+
         public ModFileStatus Status;
 
         public void Dispose()
@@ -24,42 +26,6 @@ namespace ModLib
             if (fileStream != null)
             {
                 fileStream.Dispose();
-            }
-        }
-
-        public ModFile LoadSegment(long offset, int size)
-        {
-            ModFile segment = new ModFile();
-            segment.fileStream = new MemoryStream(size);
-
-            fileStream.Seek(offset, SeekOrigin.Begin);
-            
-            byte[] buffer = new byte[size];
-            fileStream.Read(buffer, 0, buffer.Length);
-            segment.fileStream.Write(buffer, 0, buffer.Length);
-
-
-            segment.fileStream.Position = 0;
-
-            return segment;
-        }
-
-        [Obsolete("FlushToFile is deprecated, use WriteToFile")]
-        public void FlushToFile(string filename)
-        {
-            if (fileStream is MemoryStream)
-            {
-                using (FileStream stream = File.Create(filename))
-                {
-                    fileStream.Seek(0, SeekOrigin.Begin);
-                    stream.Seek(0, SeekOrigin.Begin);
-                    
-                    fileStream.CopyTo(stream);
-                }
-            }
-            else
-            {
-                Console.WriteLine("Unnecessary FlushToFile call that will not be executed");
             }
         }
     }
