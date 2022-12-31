@@ -16,6 +16,12 @@ namespace ModLib
             fileStream.Write(pad, 0, pad.Length);
         }
 
+        public void WritePascalString(string toWrite, int padding = 0)
+        {
+            WriteShort((short)(toWrite.Length + padding), true);
+            WriteString(toWrite, padding);
+        }
+
         private void WriteBlock(byte[] block, bool bigEndian)
         {
             if (bigEndian)
