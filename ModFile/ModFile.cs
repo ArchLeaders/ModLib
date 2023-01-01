@@ -21,6 +21,13 @@ namespace ModLib
 
         public ModFileStatus Status;
 
+        public ModFile(byte[] data) 
+        {
+            fileStream = new MemoryStream(data);
+        }
+
+        public ModFile() { }
+
         public void Dispose()
         {
             if (fileStream != null)
