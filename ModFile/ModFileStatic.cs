@@ -79,6 +79,18 @@ namespace ModLib
         }
 
         /// <summary>
+        /// Creates a ModFile instance that uses a stream in memory, with the specified capacity.
+        /// </summary>
+        /// <param name="capacity"></param>
+        /// <returns></returns>
+        public static ModFile Create(int capacity)
+        {
+            ModFile file = new ModFile();
+            file.fileStream = new MemoryStream(capacity);
+            return file;
+        }
+
+        /// <summary>
         /// Creates a ModFile instance, but writes all buffer content direct to disk. Useful for large files.
         /// </summary>
         /// <param name="location"></param>

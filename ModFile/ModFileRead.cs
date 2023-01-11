@@ -159,7 +159,7 @@ namespace ModLib
             //Seek(0, System.IO.SeekOrigin.Begin);
             byte[] buffer = ReadArray(searchQuery.Length); // Read the first sq.Length bytes into the buffer
             int bufferOffset = 0;
-            for (int i = searchQuery.Length; i < Length; i++)
+            for (int i = searchQuery.Length; i + offset < Length; i++)
             {
                 if (CompareEquality(searchQuery, buffer, bufferOffset)) { Seek(offset, System.IO.SeekOrigin.Begin); return i - searchQuery.Length; }
                 buffer[bufferOffset] = ReadByte();
