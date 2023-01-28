@@ -13,7 +13,7 @@ public partial class ModFile
         read = result;
         return result == comparison;
     }
-    
+
     public bool CheckString(string comparison, string errorMessage)
     {
         bool result = CheckString(comparison, out string read);
@@ -32,7 +32,7 @@ public partial class ModFile
         read = result;
         return result == comparison;
     }
-    
+
     public bool CheckInt(int comparison, string errorMessage, bool bigEndian = true)
     {
         bool result = CheckInt(comparison, out int read, bigEndian);
