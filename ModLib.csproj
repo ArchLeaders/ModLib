@@ -1,9 +1,9 @@
-<Project Sdk="Microsoft.NET.Sdk">
+﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
     <TargetFramework>net6.0</TargetFramework>
-    <Platforms>AnyCPU</Platforms>
-    <Configurations>Debug;Release;Build</Configurations>
+	  <GenerateTargetFrameworkAttribute>false</GenerateTargetFrameworkAttribute>
+	  <GenerateAssemblyInfo>false</GenerateAssemblyInfo>
   </PropertyGroup>
 
   <ItemGroup>
